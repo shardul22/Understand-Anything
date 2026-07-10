@@ -282,6 +282,18 @@ git lfs track ".ua/*.json"
 git add .gitattributes .ua/
 ```
 
+### Dashboard'u Claude Code olmadan görüntüleyin
+
+Graf bir kez üretilip commit'lendikten sonra, ekipteki herkes onu tek bir komutla açabilir — Claude Code yok, LLM yok, API anahtarı yok. Yalnızca Node.js (>= 18) gerekir:
+
+```bash
+npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz /path/to/analyzed/project
+```
+
+Terminal, tokenlı bir URL (`http://127.0.0.1:5173/?token=…`) yazdırır ve tam etkileşimli dashboard'u tarayıcınızda açar. Proje dizini (varsayılan: geçerli dizin), commit'lenmiş veri dizinini (`.ua/` veya eski `.understand-anything/`) içermelidir. Her şey yerel diskten salt okunur olarak sunulur — LLM çağrısı yapılmaz, hiçbir veri makinenizden çıkmaz.
+
+Depoyu klonlayarak mı çalışıyorsunuz? `pnpm install && pnpm --filter @understand-anything/core build`, ardından `GRAPH_DIR=/path/to/analyzed/project pnpm dev:dashboard` aynı işi Vite geliştirme sunucusu üzerinden yapar.
+
 ---
 
 ## 🔧 Kaputun Altında

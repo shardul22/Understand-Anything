@@ -281,6 +281,18 @@ git lfs track ".ua/*.json"
 git add .gitattributes .ua/
 ```
 
+### 無需 Claude Code 也能檢視儀表盤
+
+圖譜產生並提交後，團隊中的任何人只需一條命令即可開啟它 —— 無需 Claude Code，無需 LLM，無需 API 金鑰，只需要 Node.js（>= 18）：
+
+```bash
+npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz /path/to/analyzed/project
+```
+
+終端會印出一個帶權杖的 URL（`http://127.0.0.1:5173/?token=…`），並在瀏覽器中開啟完整的互動式儀表盤。專案目錄（預設：目前目錄）必須包含已提交的資料目錄（`.ua/`，或舊版 `.understand-anything/`）。所有內容都從本機磁碟以唯讀方式提供 —— 沒有 LLM 呼叫，也不會有任何資料離開你的機器。
+
+如果你是從克隆的儲存庫工作：先執行 `pnpm install && pnpm --filter @understand-anything/core build`，再執行 `GRAPH_DIR=/path/to/analyzed/project pnpm dev:dashboard`，即可透過 Vite 開發伺服器達到同樣的效果。
+
 ---
 
 ## 🔧 技術原理

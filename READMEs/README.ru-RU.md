@@ -282,6 +282,18 @@ git lfs track ".ua/*.json"
 git add .gitattributes .ua/
 ```
 
+### Просмотр панели без Claude Code
+
+Как только граф сгенерирован и закоммичен, любой участник команды может открыть его одной командой — без Claude Code, без LLM, без API-ключа. Нужен только Node.js (>= 18):
+
+```bash
+npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz /path/to/analyzed/project
+```
+
+В терминале выводится URL с токеном (`http://127.0.0.1:5173/?token=…`), и полностью интерактивная панель открывается в браузере. Каталог проекта (по умолчанию — текущий каталог) должен содержать закоммиченный каталог с данными (`.ua/` или устаревший `.understand-anything/`). Всё раздаётся только для чтения с локального диска — никаких обращений к LLM, никакие данные не покидают вашу машину.
+
+Работаете из клона репозитория? `pnpm install && pnpm --filter @understand-anything/core build`, затем `GRAPH_DIR=/path/to/analyzed/project pnpm dev:dashboard` — то же самое через dev-сервер Vite.
+
 ---
 
 ## 🔧 Под капотом

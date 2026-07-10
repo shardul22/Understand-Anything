@@ -281,6 +281,18 @@ git lfs track ".ua/*.json"
 git add .gitattributes .ua/
 ```
 
+### 无需 Claude Code 也能查看仪表盘
+
+图谱生成并提交后，团队中的任何人只需一条命令即可打开它 —— 无需 Claude Code，无需 LLM，无需 API 密钥，只需要 Node.js（>= 18）：
+
+```bash
+npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz /path/to/analyzed/project
+```
+
+终端会打印一个带令牌的 URL（`http://127.0.0.1:5173/?token=…`），并在浏览器中打开完整的交互式仪表盘。项目目录（默认：当前目录）必须包含已提交的数据目录（`.ua/`，或旧版 `.understand-anything/`）。所有内容都从本地磁盘以只读方式提供 —— 没有 LLM 调用，也不会有任何数据离开你的机器。
+
+如果你是从克隆的仓库工作：先执行 `pnpm install && pnpm --filter @understand-anything/core build`，再运行 `GRAPH_DIR=/path/to/analyzed/project pnpm dev:dashboard`，即可通过 Vite 开发服务器实现同样的效果。
+
 ---
 
 ## 🔧 技术原理

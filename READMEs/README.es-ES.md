@@ -281,6 +281,18 @@ git lfs track ".ua/*.json"
 git add .gitattributes .ua/
 ```
 
+### Ver el dashboard sin Claude Code
+
+Una vez que el grafo se ha generado y subido al repositorio, cualquier persona del equipo puede abrirlo con un solo comando: sin Claude Code, sin LLM, sin clave de API. Solo hace falta Node.js (>= 18):
+
+```bash
+npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz /path/to/analyzed/project
+```
+
+La terminal imprime una URL con token (`http://127.0.0.1:5173/?token=…`) y abre el dashboard interactivo completo en tu navegador. El directorio del proyecto (por defecto: el directorio actual) debe contener el directorio de datos versionado (`.ua/`, o el heredado `.understand-anything/`). Todo se sirve en modo solo lectura desde el disco local: sin llamadas al LLM, sin que ningún dato salga de tu máquina.
+
+¿Trabajas desde un clon del repositorio? `pnpm install && pnpm --filter @understand-anything/core build`, y luego `GRAPH_DIR=/path/to/analyzed/project pnpm dev:dashboard` hace lo mismo a través del servidor de desarrollo de Vite.
+
 ---
 
 ## 🔧 Bajo el Capó

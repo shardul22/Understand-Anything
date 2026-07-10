@@ -281,6 +281,18 @@ git lfs track ".ua/*.json"
 git add .gitattributes .ua/
 ```
 
+### Claude Code 없이 대시보드 보기
+
+그래프를 한 번 생성해 커밋해두면, 팀의 누구나 명령어 하나로 열 수 있습니다. Claude Code 도, LLM 도, API 키도 필요 없으며, Node.js(>= 18)만 있으면 됩니다:
+
+```bash
+npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz /path/to/analyzed/project
+```
+
+터미널에 토큰이 포함된 URL(`http://127.0.0.1:5173/?token=…`)이 출력되고, 완전한 인터랙티브 대시보드가 브라우저에서 열립니다. 프로젝트 디렉터리(기본값: 현재 디렉터리)에는 커밋된 데이터 디렉터리(`.ua/`, 또는 레거시 `.understand-anything/`)가 있어야 합니다. 모든 것은 로컬 디스크에서 읽기 전용으로 제공되며, LLM 호출도 없고 데이터가 사용자의 컴퓨터를 벗어나지 않습니다.
+
+저장소를 클론해서 작업 중이라면 `pnpm install && pnpm --filter @understand-anything/core build` 후 `GRAPH_DIR=/path/to/analyzed/project pnpm dev:dashboard` 를 실행하면 Vite 개발 서버를 통해 같은 결과를 얻을 수 있습니다.
+
 ---
 
 ## 🔧 작동 원리
