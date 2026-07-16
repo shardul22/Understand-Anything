@@ -11,6 +11,10 @@ import { defineConfig } from 'vitest/config';
 // files are excluded here to avoid double-counting.
 export default defineConfig({
   test: {
+    // Windows CI runners are slower for subprocess + tree-sitter WASM cold starts;
+    // several skill tests (Swift import map, large scan-project fixtures) sit near
+    // the 5s default and flake under load.
+    testTimeout: process.platform === 'win32' ? 20_000 : 5_000,
     include: [
       'tests/**/*.test.{js,mjs,ts}',
       'understand-anything-plugin/src/**/*.test.{js,mjs,ts}',
